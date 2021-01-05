@@ -8,16 +8,13 @@ from datetime import datetime
 
 digit2 = lambda myint: '0{}'.format(myint) if  myint<10 else str(myint)
 
-def now(date=False):
+def now():
     '''
-    Return current datetime or just date if <date> set at True
+    Return current datetime
     '''
-    if date:
-        return datetime.now().date()
-    else:
-        return datetime.now()
+    return datetime.now()
 
-def file_stamps(date=now(), time=False, file=""):
+def file_stamps(date=now(), time=True, file=""):
     '''
     Return current 'YYmmdd' by default
             <date> 'YYmmdd' if needed 
