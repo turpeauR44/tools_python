@@ -4,7 +4,34 @@ Created on Sun Sep  6 23:02:59 2020
 
 @author: turpeau.romain
 """
-import datetime
+from datetime import datetime
+
+digit2 = lambda myint: '0{}'.format(myint) if  myint<10 else str(myint)
+
+def now(date=False):
+    '''
+    Return current datetime or just date if <date> set at True
+    '''
+    if date:
+        return datetime.now().date()
+    else:
+        return datetime.now()
+
+def file_stamps(date=now(), time=False, file=""):
+    '''
+    Return current 'YYmmdd' by default
+            <date> 'YYmmdd' if needed 
+            with time details : 'YYMMdd_HHMMSS' if <time> set at True
+    '''
+    date_str = '{}{}{}_'.format(date.year-2000,digit2(date.month),digit2(date.day))
+    if time:
+        try:
+            date_str = '{}{}{}{}_'.format(date_str,digit2(date.hour),digit2(date.minute),digit2(date.second))
+        except:
+            date_str = '{}00000_'.format(date_str)
+
+    return '{}_{}'.format(date_str,file)
+
 
 transto_sqldatetime = lambda myDate: '{}-{}-{} {}:{}:{}'.format(myDate.year, myDate.day, myDate.month, myDate.hour, myDate.minute,myDate.second) if myDate!=None else None
 transto_sqldate = lambda myDate: '{}-{}-{}'.format(myDate.year, myDate.month, myDate.day) if myDate!=None else None
@@ -27,7 +54,7 @@ get_now = lambda : datetime.datetime.now()
 transTo_Filedate = lambda date: "{}{}{}".format(digit2_Year(date), digit2_Month(date), digit2_Day(date)) 
 
 digit2_Year = lambda date: date.year-2000
-digit2_Month = lambda date: '0{}'.format(date.month) if date.month<10 else str(date.month)
+digit2 = lambda myint: '0{}'.format(date.month) if date.month<10 else str(date.month)
 digit2_Day = lambda date: '0{}'.format(date.day) if date.day<10 else str(date.day)
 
 
